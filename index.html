@@ -321,10 +321,163 @@
     .hero-bg {
       position: absolute;
       inset: 0;
+      background-image: url('images/hero.jpg');
+      background-size: cover;
+      background-position: center;
+      background-color: var(--green-dark);
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
       background:
-        radial-gradient(ellipse at 20% 50%, rgba(212,160,23,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(230,81,0,0.07) 0%, transparent 50%),
-        linear-gradient(135deg, #0a3d0f 0%, #1B5E20 40%, #0a3d0f 100%);
+        radial-gradient(ellipse at 20% 50%, rgba(212,160,23,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(230,81,0,0.08) 0%, transparent 50%),
+        linear-gradient(135deg, rgba(10,61,15,0.88) 0%, rgba(27,94,32,0.78) 40%, rgba(10,61,15,0.88) 100%);
+    }
+
+    /* =============================================
+       MENU CARD IMAGE
+    ============================================= */
+    .menu-card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .menu-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+
+    .menu-card:hover .menu-card-img img {
+      transform: scale(1.05);
+    }
+
+    /* =============================================
+       ABOUT IMAGE
+    ============================================= */
+    .about-img-real {
+      width: 100%;
+      aspect-ratio: 4/5;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-strong);
+    }
+
+    .about-img-real img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* =============================================
+       CATERING IMAGE
+    ============================================= */
+    .catering-img-container {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+
+    .catering-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* =============================================
+       FEATURED DISH IMAGE
+    ============================================= */
+    .menu-featured-img {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.5);
+      border: 4px solid rgba(212,160,23,0.4);
+    }
+
+    .menu-featured-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* =============================================
+       GALLERY SECTION
+    ============================================= */
+    .gallery {
+      padding: 100px 0;
+      background: var(--white);
+    }
+
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .gallery-item {
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      box-shadow: var(--shadow-soft);
+      transition: all var(--transition);
+      position: relative;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .menu-featured-img {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* Decorative geometric pattern overlay */
@@ -1717,8 +1870,11 @@
       <div class="about-grid">
 
         <div class="about-visual">
-          <div class="about-img-placeholder">
-            <div class="dish-icon">🍖</div>
+          <div class="about-img-real">
+            <div class="menu-card-img" style="aspect-ratio: 4/5; background: linear-gradient(145deg, var(--green) 0%, var(--green-dark) 100%); display:flex; align-items:center; justify-content:center; border-radius: var(--radius-lg);">
+              <img src="images/interior.jpg" alt="Balochistan Restaurant interior — Fairview, NJ" loading="lazy" style="border-radius: var(--radius-lg);"
+                onerror="this.parentElement.innerHTML='<span style=\'color:var(--gold);font-family:Playfair Display,serif;font-size:1.2rem;font-style:italic;padding:40px;text-align:center;\'>A Taste of<br>Balochistan</span>';">
+            </div>
           </div>
           <div class="about-badge">
             <span class="badge-year">2025</span>
@@ -1833,14 +1989,20 @@
             <em style="color: rgba(255,255,255,0.6); font-size: 0.92rem;">Available whole or by portion. Advance order recommended for whole lamb.</em>
           </p>
         </div>
-        <div class="menu-featured-visual">🍖</div>
+        <div class="menu-featured-img" style="background: linear-gradient(135deg, rgba(212,160,23,0.2), rgba(10,61,15,0.8)); display:flex; align-items:center; justify-content:center;">
+          <img src="images/lamb-sajji.jpg" alt="Lamb Sajji — Balochistan Restaurant signature dish" loading="lazy"
+            onerror="this.outerHTML='<span style=\'color:var(--gold);font-family:Playfair Display,serif;font-size:1.1rem;font-style:italic;text-align:center;padding:20px;\'>Lamb Sajji</span>';">
+        </div>
       </div>
 
       <!-- Menu Grid -->
       <div class="menu-grid">
 
         <div class="menu-card">
-          <div class="menu-card-emoji">🥘</div>
+          <div class="menu-card-img" style="background: linear-gradient(135deg, var(--green-dark), var(--green)); display:flex; align-items:center; justify-content:center; min-height:220px;">
+            <img src="images/mutton-karahi.jpg" alt="Mutton Karahi" loading="lazy" style="width:100%;height:220px;object-fit:cover;"
+              onerror="this.style.display='none'; this.parentElement.innerHTML+='<span style=\'color:var(--gold);font-family:Playfair Display,serif;font-size:1.1rem;font-style:italic;\'>Mutton Karahi</span>';">
+          </div>
           <div class="menu-card-body">
             <span class="menu-card-tag">Karahi</span>
             <h3 class="menu-card-name">Mutton Karahi</h3>
@@ -1856,7 +2018,10 @@
         </div>
 
         <div class="menu-card">
-          <div class="menu-card-emoji">🍚</div>
+          <div class="menu-card-img" style="background: linear-gradient(135deg, var(--green-dark), var(--green)); display:flex; align-items:center; justify-content:center; min-height:220px;">
+            <img src="images/biryani.jpg" alt="Biryani" loading="lazy" style="width:100%;height:220px;object-fit:cover;"
+              onerror="this.style.display='none'; this.parentElement.innerHTML+='<span style=\'color:var(--gold);font-family:Playfair Display,serif;font-size:1.1rem;font-style:italic;\'>Biryani</span>';">
+          </div>
           <div class="menu-card-body">
             <span class="menu-card-tag">Rice Dish</span>
             <h3 class="menu-card-name">Biryani</h3>
@@ -1872,7 +2037,10 @@
         </div>
 
         <div class="menu-card">
-          <div class="menu-card-emoji">🍢</div>
+          <div class="menu-card-img" style="background: linear-gradient(135deg, var(--green-dark), var(--green)); display:flex; align-items:center; justify-content:center; min-height:220px;">
+            <img src="images/seekh-kebab.jpg" alt="Seekh Kebab" loading="lazy" style="width:100%;height:220px;object-fit:cover;"
+              onerror="this.style.display='none'; this.parentElement.innerHTML+='<span style=\'color:var(--gold);font-family:Playfair Display,serif;font-size:1.1rem;font-style:italic;\'>Seekh Kebab</span>';">
+          </div>
           <div class="menu-card-body">
             <span class="menu-card-tag">Grilled</span>
             <h3 class="menu-card-name">Seekh Kebab</h3>
@@ -1888,7 +2056,10 @@
         </div>
 
         <div class="menu-card">
-          <div class="menu-card-emoji">🍗</div>
+          <div class="menu-card-img" style="background: linear-gradient(135deg, var(--green-dark), var(--green)); display:flex; align-items:center; justify-content:center; min-height:220px;">
+            <img src="images/chicken-tikka.jpg" alt="Chicken Tikka" loading="lazy" style="width:100%;height:220px;object-fit:cover;"
+              onerror="this.style.display='none'; this.parentElement.innerHTML+='<span style=\'color:var(--gold);font-family:Playfair Display,serif;font-size:1.1rem;font-style:italic;\'>Chicken Tikka</span>';">
+          </div>
           <div class="menu-card-body">
             <span class="menu-card-tag">Grilled</span>
             <h3 class="menu-card-name">Chicken Tikka</h3>
@@ -1904,7 +2075,10 @@
         </div>
 
         <div class="menu-card">
-          <div class="menu-card-emoji">🫕</div>
+          <div class="menu-card-img" style="background: linear-gradient(135deg, var(--green-dark), var(--green)); display:flex; align-items:center; justify-content:center; min-height:220px;">
+            <img src="images/nihari.jpg" alt="Nihari" loading="lazy" style="width:100%;height:220px;object-fit:cover;"
+              onerror="this.style.display='none'; this.parentElement.innerHTML+='<span style=\'color:var(--gold);font-family:Playfair Display,serif;font-size:1.1rem;font-style:italic;\'>Nihari</span>';">
+          </div>
           <div class="menu-card-body">
             <span class="menu-card-tag">Slow Cooked</span>
             <h3 class="menu-card-name">Nihari</h3>
@@ -1920,7 +2094,10 @@
         </div>
 
         <div class="menu-card">
-          <div class="menu-card-emoji">🫓</div>
+          <div class="menu-card-img" style="background: linear-gradient(135deg, var(--green-dark), var(--green)); display:flex; align-items:center; justify-content:center; min-height:220px;">
+            <img src="images/naan.jpg" alt="Fresh Tandoori Naan" loading="lazy" style="width:100%;height:220px;object-fit:cover;"
+              onerror="this.style.display='none'; this.parentElement.innerHTML+='<span style=\'color:var(--gold);font-family:Playfair Display,serif;font-size:1.1rem;font-style:italic;\'>Tandoori Naan</span>';">
+          </div>
           <div class="menu-card-body">
             <span class="menu-card-tag">Bread</span>
             <h3 class="menu-card-name">Fresh Tandoori Naan</h3>
@@ -1936,7 +2113,9 @@
         </div>
 
         <div class="menu-card">
-          <div class="menu-card-emoji">🥩</div>
+          <div class="menu-card-img" style="min-height:220px; overflow:hidden;">
+            <img src="images/lamb-chops.jpg" alt="Lamb Chops (Chaamp) — Balochi Special" loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;">
+          </div>
           <div class="menu-card-body">
             <span class="menu-card-tag">Balochi Special</span>
             <h3 class="menu-card-name">Lamb Chops (Chaamp)</h3>
@@ -1952,7 +2131,10 @@
         </div>
 
         <div class="menu-card">
-          <div class="menu-card-emoji">🍵</div>
+          <div class="menu-card-img" style="background: linear-gradient(135deg, var(--green-dark), var(--green)); display:flex; align-items:center; justify-content:center; min-height:220px;">
+            <img src="images/pink-chai.jpg" alt="Kashmiri Pink Chai" loading="lazy" style="width:100%;height:220px;object-fit:cover;"
+              onerror="this.style.display='none'; this.parentElement.innerHTML+='<span style=\'color:var(--gold);font-family:Playfair Display,serif;font-size:1.1rem;font-style:italic;\'>Kashmiri Pink Chai</span>';">
+          </div>
           <div class="menu-card-body">
             <span class="menu-card-tag">Drink</span>
             <h3 class="menu-card-name">Kashmiri Pink Chai</h3>
@@ -1968,7 +2150,10 @@
         </div>
 
         <div class="menu-card">
-          <div class="menu-card-emoji">🍮</div>
+          <div class="menu-card-img" style="background: linear-gradient(135deg, var(--green-dark), var(--green)); display:flex; align-items:center; justify-content:center; min-height:220px;">
+            <img src="images/dessert.jpg" alt="Kheer & Gulab Jamun" loading="lazy" style="width:100%;height:220px;object-fit:cover;"
+              onerror="this.style.display='none'; this.parentElement.innerHTML+='<span style=\'color:var(--gold);font-family:Playfair Display,serif;font-size:1.1rem;font-style:italic;\'>Kheer &amp; Gulab Jamun</span>';">
+          </div>
           <div class="menu-card-body">
             <span class="menu-card-tag">Dessert</span>
             <h3 class="menu-card-name">Kheer &amp; Gulab Jamun</h3>
@@ -1992,6 +2177,56 @@
         <a href="tel:2013017500" class="btn btn-primary">📞 Call for Full Menu</a>
       </div>
 
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PHOTO GALLERY
+  ============================================================ -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <div class="gallery-header">
+        <span class="section-label">The Experience</span>
+        <h2 class="section-title">A Taste of <em>Our Kitchen</em></h2>
+        <p class="section-subtitle" style="margin: 0 auto; text-align:center;">
+          Real food. Real flavors. A feast for the eyes before the first bite.
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+
+        <div class="gallery-item" style="background: linear-gradient(135deg, var(--green-dark), var(--green)); display:flex; align-items:center; justify-content:center;">
+          <img src="images/gallery-1.jpg" alt="Balochistan Restaurant — Gallery 1" loading="lazy"
+            onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:var(--gold);font-family:Playfair Display,serif;font-size:1rem;font-style:italic;\'>Our Kitchen</span>';">
+        </div>
+
+        <div class="gallery-item" style="background: linear-gradient(135deg, #1a3a1a, #2e5e2e); display:flex; align-items:center; justify-content:center;">
+          <img src="images/gallery-2.jpg" alt="Balochistan Restaurant — Gallery 2" loading="lazy"
+            onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:var(--gold);font-family:Playfair Display,serif;font-size:1rem;font-style:italic;\'>Fresh Naan</span>';">
+        </div>
+
+        <div class="gallery-item" style="background: linear-gradient(135deg, #2a1a0a, #5e3a0e); display:flex; align-items:center; justify-content:center;">
+          <img src="images/gallery-3.jpg" alt="Balochistan Restaurant — Gallery 3" loading="lazy"
+            onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:var(--gold);font-family:Playfair Display,serif;font-size:1rem;font-style:italic;\'>Signature Kebabs</span>';">
+        </div>
+
+        <div class="gallery-item" style="background: linear-gradient(135deg, #0a2a1a, #1a5e3a); display:flex; align-items:center; justify-content:center;">
+          <img src="images/gallery-4.jpg" alt="Balochistan Restaurant — Gallery 4" loading="lazy"
+            onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:var(--gold);font-family:Playfair Display,serif;font-size:1rem;font-style:italic;\'>Karahi Station</span>';">
+        </div>
+
+        <div class="gallery-item" style="background: linear-gradient(135deg, #3a1a0a, #5e2e0a); display:flex; align-items:center; justify-content:center;">
+          <img src="images/gallery-5.jpg" alt="Balochistan Restaurant — Gallery 5" loading="lazy"
+            onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:var(--gold);font-family:Playfair Display,serif;font-size:1rem;font-style:italic;\'>Pink Chai</span>';">
+        </div>
+
+        <div class="gallery-item" style="background: linear-gradient(135deg, var(--green), #3a2a0a); display:flex; align-items:center; justify-content:center;">
+          <img src="images/gallery-6.jpg" alt="Balochistan Restaurant — Gallery 6" loading="lazy"
+            onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:var(--gold);font-family:Playfair Display,serif;font-size:1rem;font-style:italic;\'>Lamb Sajji</span>';">
+        </div>
+
+      </div>
     </div>
   </section>
 
@@ -2048,8 +2283,9 @@
 
         <div class="catering-visual">
           <div class="catering-visual-box">
-            <div class="catering-emoji-stack">
-              🎊 🍖 🥘
+            <div class="catering-img-container" style="margin-bottom: 28px; background: linear-gradient(135deg, var(--green-dark), var(--green)); display:flex; align-items:center; justify-content:center; min-height:200px;">
+              <img src="images/catering.jpg" alt="Catering — Balochistan Restaurant" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:var(--radius);"
+                onerror="this.style.display='none'; this.parentElement.innerHTML+='<span style=\'color:var(--gold);font-family:Playfair Display,serif;font-size:1.2rem;font-style:italic;\'>🎊 Catering &amp; Events</span>';">
             </div>
             <h3 class="catering-visual-title">Perfect for Every Occasion</h3>
             <p class="catering-visual-text">
@@ -2218,16 +2454,12 @@
             </div>
           </div>
 
-          <a
-            href="https://www.google.com/maps/search/312+Bergen+Blvd,+Fairview,+NJ+07022"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="map-placeholder"
-          >
-            <div class="map-pin">📍</div>
-            <p>Open in Google Maps →</p>
-            <p style="font-size: 0.78rem; color: var(--text-light);">312 Bergen Blvd, Fairview, NJ 07022</p>
-          </a>
+          <div style="margin-top: 28px; border-radius: var(--radius); overflow: hidden; border: 2px solid rgba(212,160,23,0.2);">
+            <iframe 
+              src="https://www.google.com/maps/embed/v1/place?q=312+Bergen+Blvd+Fairview+NJ+07022&key=AIzaSyC9kIrbaY0Z17c2xwHZULiHkxTQQBPGbtY"
+              width="100%" height="220" style="border:0; display:block;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
         </div>
 
       </div>
@@ -2339,15 +2571,87 @@
       </div>
 
       <div class="footer-bottom">
-        <p>© 2025 Balochistan Restaurant. All rights reserved. | Fairview, NJ</p>
+        <p>© 2026 Balochistan Restaurant. All rights reserved. | Fairview, NJ</p>
         <div class="footer-bottom-links">
           <a href="tel:2013017500">(201) 301-7500</a>
           <a href="https://www.google.com/maps/search/312+Bergen+Blvd,+Fairview,+NJ+07022" target="_blank" rel="noopener">Directions</a>
           <a href="#menu">Menu</a>
         </div>
       </div>
+
+      <!-- Powered by -->
+      <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center;">
+        <a href="https://neobop.io?ref=balochistan" target="_blank" rel="noopener" style="color: rgba(255,255,255,0.25); font-size: 0.7rem; text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s ease; font-family: 'Lato', sans-serif;" onmouseover="this.style.color='rgba(255,255,255,0.5)'" onmouseout="this.style.color='rgba(255,255,255,0.25)'">
+          Website by <span style="font-weight: 700;">neobop.io</span> — Web Design for Local Businesses
+        </a>
+      </div>
     </div>
   </footer>
+
+
+  <!-- ============================================================
+       NEOBOP FUNNEL — Subtle contact banner
+  ============================================================ -->
+  <div id="neobop-banner" style="
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 900;
+    background: linear-gradient(135deg, #0d0f1a 0%, #1a1a2e 100%);
+    border-top: 1px solid rgba(41,121,255,0.15);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    transform: translateY(100%);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 -4px 24px rgba(0,0,0,0.3);
+  ">
+    <span style="color: rgba(255,255,255,0.7); font-size: 0.8rem; font-family: 'Lato', sans-serif; font-weight: 600;">
+      ✨ Want a website like this for your business?
+    </span>
+    <a href="https://neobop.io?ref=balochistan-demo" target="_blank" rel="noopener" style="
+      background: linear-gradient(135deg, #2979FF, #FF2D8A);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-decoration: none;
+      font-family: 'Lato', sans-serif;
+      letter-spacing: 0.02em;
+      transition: transform 0.2s, box-shadow 0.2s;
+      white-space: nowrap;
+    " onmouseover="this.style.transform='scale(1.05)';this.style.boxShadow='0 4px 16px rgba(41,121,255,0.4)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='none'">
+      Get a Free Demo →
+    </a>
+    <a href="https://wa.me/12017903994?text=Hi%20Juan%2C%20I%20saw%20the%20Balochistan%20Restaurant%20demo%20and%20I%27m%20interested%20in%20a%20website%20for%20my%20business" target="_blank" rel="noopener" style="
+      background: #25D366;
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-decoration: none;
+      font-family: 'Lato', sans-serif;
+      transition: transform 0.2s;
+      white-space: nowrap;
+    " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+      💬 WhatsApp
+    </a>
+    <button onclick="document.getElementById('neobop-banner').style.transform='translateY(100%)'" style="
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.3);
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 4px 8px;
+      line-height: 1;
+    " aria-label="Close">✕</button>
+  </div>
 
 
   <!-- ============================================================
@@ -2397,6 +2701,15 @@
         dayEl.prepend(dot);
       }
     });
+
+    // ── neobop banner — show after scrolling 40% of page ─────
+    let bannerShown = false;
+    window.addEventListener('scroll', () => {
+      if (!bannerShown && window.scrollY > document.body.scrollHeight * 0.35) {
+        document.getElementById('neobop-banner').style.transform = 'translateY(0)';
+        bannerShown = true;
+      }
+    }, { passive: true });
 
     // ── Smooth reveal on scroll (Intersection Observer) ──────
     const revealEls = document.querySelectorAll(
